@@ -16,15 +16,19 @@ body {
 }
 
 /* For WebKit browsers */
-::-webkit-scrollbar {
-  width: 5px; /* width of the scrollbar */
+/* ::-webkit-scrollbar {
+  width: 5px; 
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* color of the track */
+  background: #f1f1f1; 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888; /* color of the thumb */
-  border-radius: 5px; /* roundness of the thumb */
+  background: #888; 
+  border-radius: 5px; 
+} */
+
+::-webkit-scrollbar {
+  display: none;
 }

@@ -5,7 +5,7 @@ import Main from "./components/Main";
 
 function App() {
   return (
-    <div className="text-white flex bg-gray-950">
+    <div className="text-white flex h-screen overflow-y-hidden bg-gray-950">
       <Main />
     </div>
   );

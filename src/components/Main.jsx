@@ -33,7 +33,7 @@ const Main = () => {
 
   return (
     <div className="flex-1">
-      <nav className="py-2 fixed z-10 top-0  w-full border-b bg-transparent border-gray-700">
+      <nav className="py-2 fixed z-10 top-0  w-full border-b bg-gray-950 border-gray-700">
         <div className="flex justify-between px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex  w-64 items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">

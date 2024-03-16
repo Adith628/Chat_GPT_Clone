@@ -5,7 +5,7 @@ import Main from "./components/Main";
 
 function App() {
   return (
-    <div className="text-white bg-gray-950">
+    <div className="text-white flex bg-gray-950">
       <Sidebar />
 
       {/* <Main /> */}

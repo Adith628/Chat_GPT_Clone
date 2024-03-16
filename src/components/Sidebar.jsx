@@ -2,16 +2,12 @@ import React from "react";
 import icon from "../assets/gpticon.png";
 import stars from "../assets/star.png";
 import avatar from "../assets/avatar.png";
+import send from "../assets/send.png";
 const Sidebar = () => {
   const user = "John Doe";
 
   return (
-    // <div className=" py-4 px-3">
-    //   <div className="flex items-center justify-center rounded-full h-14 w-14 bg-white ">
-    //     <img src={icon} alt="ChatGPT" className="h-10 invert " />
-    //   </div>
-    // </div>
-    <div className="">
+    <div className="flex-1">
       <nav className="py-2 fixed z-10 top-0  w-full border-b bg-transparent border-gray-700">
         <div className="flex justify-between px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex  w-64 items-center justify-between">
@@ -97,7 +93,77 @@ const Sidebar = () => {
           </ul>
         </div>
       </aside>
-      <div className="p-4 sm:ml-64 h-screen"></div>
+      <div className="flex flex-col justify-end min-w-full items-end p-4 sm:pl-72 max-w-screen-sm h-screen">
+        <div className="chats flex flex-col gap-4 w-full h-full mt-20">
+          <div className="chat flex items-start gap-2.5">
+            <img
+              className="w-8 h-8 rounded-full"
+              src={avatar}
+              alt="Jese image"
+            />
+            <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200  rounded-e-xl rounded-es-xlbg-gray-700">
+              <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="text-sm font-semibold text-white">{user}</span>
+                <span className="text-mdfont-normal text-gray-500 dark:text-gray-400">
+                  {Date.now().toLocaleString()}
+                </span>
+              </div>
+              <p className="text-md font-normal py-2.5  text-white">
+                That's awesome. I think our users will really appreciate the
+                improvements.
+              </p>
+              <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                Delivered
+              </span>
+            </div>
+          </div>
+          <div className="chat flex items-start gap-2.5">
+            <img className="w-8 h-8 rounded-full" src={icon} alt="Jese image" />
+            <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200  rounded-e-xl rounded-es-xlbg-gray-700">
+              <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="text-sm font-semibold text-white">{user}</span>
+                <span className="text-mdfont-normal text-gray-500 dark:text-gray-400">
+                  {Date.now().toLocaleString()}
+                </span>
+              </div>
+              <p className="text-md font-normal py-2.5  text-white">
+                That's awesome. I think our users will really appreciate the
+                improvements.
+              </p>
+              <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                Delivered
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="chtfooter h-fit flex w-full items-center   md:px-16
+        justify-center   "
+        >
+          <div className="relative flex  flex-1">
+            <input
+              type="search"
+              id="default-search"
+              className="block
+              text-white text-xl  bg-transparent rounded-3xl h-20 w-full p-4 ps-10 text-xlborder  focus:border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
+              placeholder="Message ChatGPT..."
+              required
+            />
+            <button
+              type="submit"
+              className="flex  rounded-3xl  items-center justify-center text-white
+              hover:outline-none hover:ring-2 hover::ring-gray-600
+              bg-gray-500 w-16
+              h-16 absolute end-2.5 bottom-2.5"
+            >
+              <img src={send} className="h-6 -rotate-90" alt="" />
+            </button>
+          </div>
+        </div>
+        <div className="text-center text-sm mt-4 text-gray-400 self-center">
+          ChatGPT can make mistakes. Consider checking important information.
+        </div>
+      </div>
     </div>
   );
 };

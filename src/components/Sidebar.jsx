@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import icon from "../assets/gpticon.png";
 import stars from "../assets/star.png";
 import avatar from "../assets/avatar.png";
 import send from "../assets/send.png";
+import { sendMsgToGPT } from "./OpenAi";
 const Sidebar = () => {
   const user = "John Doe";
+
+  const [prompt, setPrompt] = useState("");
+  const [gptres, setGptres] = useState("");
+  const [userres, setUserres] = useState("");
+  const [messages, setMessages] = useState([
+    {
+      text: "Hello, I'm ChatGPT. How can I help you today?",
+      isBot: true,
+    },
+  ]);
+
+  const handleSend = async (msg) => {
+    const res = await sendMsgToGPT(msg);
+    setPrompt("");
+    setMessages([
+      ...messages,
+      {
+        text: msg,
+        isBot: false,
+      },
+      {
+        text: res,
+        isBot: true,
+      },
+    ]);
+  };
 
   return (
     <div className="flex-1">
@@ -29,7 +56,7 @@ const Sidebar = () => {
                 >
                   <path
                     clipPath="evenodd"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
                   ></path>
                 </svg>
@@ -94,8 +121,8 @@ const Sidebar = () => {
         </div>
       </aside>
       <div className="flex flex-col justify-end min-w-full items-end p-4 sm:pl-72 max-w-screen-sm h-screen">
-        <div className="chats flex flex-col gap-4 w-full h-full mt-20">
-          <div className="chat flex items-start gap-2.5">
+        <div className="chats overflow-y-scroll flex flex-col gap-4 w-full h-full mt-20">
+          {/* <div className="chat flex items-start gap-2.5">
             <img
               className="w-8 h-8 rounded-full"
               src={avatar}
@@ -109,8 +136,7 @@ const Sidebar = () => {
                 </span>
               </div>
               <p className="text-md font-normal py-2.5  text-white">
-                That's awesome. I think our users will really appreciate the
-                improvements.
+                {userres}
               </p>
               <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                 Delivered
@@ -126,15 +152,46 @@ const Sidebar = () => {
                   {Date.now().toLocaleString()}
                 </span>
               </div>
-              <p className="text-md font-normal py-2.5  text-white">
-                That's awesome. I think our users will really appreciate the
-                improvements.
-              </p>
+              <p className="text-md font-normal py-2.5  text-white">{gptres}</p>
               <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                 Delivered
               </span>
             </div>
-          </div>
+          </div> */}
+          {messages.map((msg, index) => {
+            return (
+              <div
+                key={index}
+                className={`chat flex mt-2 items-start gap-2.5 justify-start`}
+              >
+                <img
+                  className="w-8 h-8 rounded-full"
+                  src={msg.isBot ? icon : avatar}
+                  alt="Jese image"
+                />
+                <div
+                  className={`flex flex-col  w-full max-w-[320px] leading-1.5 p-4 border-gray-200  rounded-e-xl rounded-es-xl ${
+                    msg.isBot ? "bg-gray-700" : "bg-gray-500"
+                  }`}
+                >
+                  <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                    <span className="text-sm font-semibold text-white">
+                      {msg.isBot ? "ChatGPT" : user}
+                    </span>
+                    <span className="text-mdfont-normal text-gray-500 dark:text-gray-400">
+                      {Date.now().toLocaleString()}
+                    </span>
+                  </div>
+                  <p className="text-md font-normal py-2.5  text-white">
+                    {msg.text}
+                  </p>
+                  <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                    Delivered
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
         <div
           className="chtfooter h-fit flex w-full items-center   md:px-16
@@ -142,6 +199,10 @@ const Sidebar = () => {
         >
           <div className="relative flex  flex-1">
             <input
+              value={prompt}
+              onChange={(e) => {
+                setPrompt(e.target.value);
+              }}
               type="search"
               id="default-search"
               className="block
@@ -155,6 +216,7 @@ const Sidebar = () => {
               hover:outline-none hover:ring-2 hover::ring-gray-600
               bg-gray-500 w-16
               h-16 absolute end-2.5 bottom-2.5"
+              onClick={() => handleSend(prompt)}
             >
               <img src={send} className="h-6 -rotate-90" alt="" />
             </button>
